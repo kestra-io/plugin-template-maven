@@ -19,6 +19,7 @@
         <lombok.version>1.18.30</lombok.version>
         <kestra.version>[0.15,)</kestra.version>
         <micronaut.version>4.3.4</micronaut.version>
+        <micronaut.validation.version>4.4.4</micronaut.validation.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
@@ -205,7 +206,7 @@
                             <path>
                                 <groupId>io.micronaut.validation</groupId>
                                 <artifactId>micronaut-validation-processor</artifactId>
-                                <version>${micronaut.version}</version>
+                                <version>${micronaut.validation.version}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
@@ -233,7 +234,7 @@
                                     <path>
                                         <groupId>io.micronaut.validation</groupId>
                                         <artifactId>micronaut-validation-processor</artifactId>
-                                        <version>${micronaut.version}</version>
+                                        <version>${micronaut.validation.version}</version>
                                     </path>
                                 </annotationProcessorPaths>
                             </configuration>
