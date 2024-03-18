@@ -7,19 +7,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.kestra.plugin</groupId>
     <artifactId>plugin-template-maven</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.15.0-SNAPSHOT</version>
 
     <properties>
-        <jdk.version>11</jdk.version>
+        <jdk.version>17</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <lombok.version>1.18.22</lombok.version>
-        <kestra.version>0.4.0</kestra.version>
-        <micronaut.version>3.3.3</micronaut.version>
-        <junit.version>5.8.2</junit.version>
+        <lombok.version>1.18.30</lombok.version>
+        <kestra.version>[0.15,)</kestra.version>
+        <micronaut.version>4.3.4</micronaut.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     </properties>
@@ -34,16 +33,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-bom</artifactId>
+                <groupId>io.micronaut.platform</groupId>
+                <artifactId>micronaut-platform</artifactId>
                 <version>${micronaut.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -63,8 +55,19 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>io.micronaut</groupId>
+            <groupId>io.micronaut.validation</groupId>
             <artifactId>micronaut-validation</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- uncomment if the plugin uses reactive types -->
+<!--        <dependency>-->
+<!--            <groupId>io.micronaut.reactor</groupId>-->
+<!--            <artifactId>micronaut-reactor</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-jackson-databind</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -124,7 +127,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.9.0</version>
+            <version>2.10.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -200,8 +203,8 @@
                                 <version>${micronaut.version}</version>
                             </path>
                             <path>
-                                <groupId>io.micronaut</groupId>
-                                <artifactId>micronaut-validation</artifactId>
+                                <groupId>io.micronaut.validation</groupId>
+                                <artifactId>micronaut-validation-processor</artifactId>
                                 <version>${micronaut.version}</version>
                             </path>
                         </annotationProcessorPaths>
@@ -228,8 +231,8 @@
                                         <version>${micronaut.version}</version>
                                     </path>
                                     <path>
-                                        <groupId>io.micronaut</groupId>
-                                        <artifactId>micronaut-validation</artifactId>
+                                        <groupId>io.micronaut.validation</groupId>
+                                        <artifactId>micronaut-validation-processor</artifactId>
                                         <version>${micronaut.version}</version>
                                     </path>
                                 </annotationProcessorPaths>
