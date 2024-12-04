@@ -2,6 +2,7 @@ package io.kestra.plugin.templates;
 
 import com.google.common.collect.ImmutableMap;
 import io.kestra.core.junit.annotations.KestraTest;
+import io.kestra.core.models.property.Property;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import io.kestra.core.runners.RunContext;
@@ -26,7 +27,7 @@ class ExampleTest {
         RunContext runContext = runContextFactory.of(ImmutableMap.of("variable", "John Doe"));
 
         Example task = Example.builder()
-            .format("Hello {{ variable }}")
+            .format(Property.of("Hello {{ variable }}"))
             .build();
 
         Example.Output runOutput = task.run(runContext);
