@@ -1,14 +1,14 @@
 package io.kestra.plugin.templates;
 
+import io.kestra.core.models.annotations.Plugin;
 import io.kestra.core.models.property.Property;
+import io.kestra.core.models.tasks.RunnableTask;
+import io.kestra.core.models.tasks.Task;
+import io.kestra.core.runners.RunContext;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
-import io.kestra.core.models.annotations.PluginProperty;
-import io.kestra.core.models.tasks.RunnableTask;
-import io.kestra.core.models.tasks.Task;
-import io.kestra.core.runners.RunContext;
 import org.slf4j.Logger;
 
 @SuperBuilder
@@ -20,6 +20,14 @@ import org.slf4j.Logger;
     title = "Short description for this task",
     description = "Full description of this task"
 )
+@Plugin(
+    examples = {
+        @io.kestra.core.models.annotations.Example(
+            title = "Simple revert",
+            code = { "format: \"Text to be reverted\"" }
+        )
+    }
+)
 public class Example extends Task implements RunnableTask<Example.Output> {
     @Schema(
         title = "Short description for this input",
@@ -28,10 +36,10 @@ public class Example extends Task implements RunnableTask<Example.Output> {
     private Property<String> format;
 
     @Override
-    public Example.Output run(RunContext runContext) throws Exception {
+    public Output run(RunContext runContext) throws Exception {
         Logger logger = runContext.logger();
 
-        String render = runContext.render(format).as(String.class).orElse(null);
+        String render = runContext.render(format).as(String.class).orElse("");
         logger.debug(render);
 
         return Output.builder()
@@ -40,7 +48,7 @@ public class Example extends Task implements RunnableTask<Example.Output> {
     }
 
     /**
-     * Input or Output can nested as you need
+     * Input or Output can be nested as you need
      */
     @Builder
     @Getter

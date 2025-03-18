@@ -4,7 +4,7 @@
   <groupId>io.kestra.plugin</groupId>
   <artifactId>plugin-template-maven</artifactId>
   <name>plugin-template-maven</name>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.21.0-SNAPSHOT</version>
   <description>Plugin template for Kestra</description>
   <url>https://github.com/kestra-io/plugin-template-maven</url>
   <issueManagement>
@@ -56,7 +56,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.10.0</version>
+          <version>${maven-compiler-plugin.version}</version>
           <executions>
             <execution>
               <id>test-compile</id>
@@ -71,17 +71,18 @@
                   <path>
                     <groupId>org.projectlombok</groupId>
                     <artifactId>lombok</artifactId>
-                    <version>${lombok.version}</version>
                   </path>
                   <path>
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-inject-java</artifactId>
-                    <version>${micronaut.version}</version>
                   </path>
                   <path>
-                    <groupId>io.micronaut</groupId>
-                    <artifactId>micronaut-validation</artifactId>
-                    <version>${micronaut.version}</version>
+                    <groupId>io.micronaut.validation</groupId>
+                    <artifactId>micronaut-validation-processor</artifactId>
+                  </path>
+                  <path>
+                    <groupId>io.kestra</groupId>
+                    <artifactId>processor</artifactId>
                   </path>
                 </annotationProcessorPaths>
               </configuration>
@@ -95,17 +96,18 @@
               <path>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
               </path>
               <path>
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-inject-java</artifactId>
-                <version>${micronaut.version}</version>
               </path>
               <path>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-validation</artifactId>
-                <version>${micronaut.version}</version>
+                <groupId>io.micronaut.validation</groupId>
+                <artifactId>micronaut-validation-processor</artifactId>
+              </path>
+              <path>
+                <groupId>io.kestra</groupId>
+                <artifactId>processor</artifactId>
               </path>
             </annotationProcessorPaths>
           </configuration>
@@ -115,7 +117,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>${maven-shade-plugin.version}</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -143,209 +145,25 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.22</version>
+      <version>1.18.36</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-inject-java</artifactId>
-      <version>3.3.3</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-aop</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>io.micronaut</groupId>
-      <artifactId>micronaut-validation</artifactId>
-      <version>3.3.3</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>micronaut-core-reactive</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>validation-api</artifactId>
-          <groupId>javax.validation</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>reactor-core</artifactId>
-          <groupId>io.projectreactor</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.kestra</groupId>
       <artifactId>core</artifactId>
-      <version>0.4.0</version>
+      <version>0.21.0</version>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>micronaut-http-client</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-rxjava2-http-client</artifactId>
-          <groupId>io.micronaut.rxjava2</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-lang3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-annotations</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-runtime</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>javax.annotation-api</artifactId>
-          <groupId>javax.annotation</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-data-model</artifactId>
-          <groupId>io.micronaut.data</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-management</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micrometer-core</artifactId>
-          <groupId>io.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-          <groupId>io.micronaut.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>logback-classic</artifactId>
-          <groupId>ch.qos.logback</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>log4j-to-slf4j</artifactId>
-          <groupId>org.apache.logging.log4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jul-to-slf4j</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-databind</artifactId>
-          <groupId>com.fasterxml.jackson.core</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-dataformat-yaml</artifactId>
-          <groupId>com.fasterxml.jackson.dataformat</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-module-parameter-names</artifactId>
-          <groupId>com.fasterxml.jackson.module</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-datatype-guava</artifactId>
-          <groupId>com.fasterxml.jackson.datatype</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>friendly-id</artifactId>
-          <groupId>com.devskiller.friendly-id</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>handlebars</artifactId>
-          <groupId>com.github.jknack</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-jq</artifactId>
-          <groupId>net.thisptr</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-dataformat-ion</artifactId>
-          <groupId>com.fasterxml.jackson.dataformat</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>failsafe</artifactId>
-          <groupId>net.jodah</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>oshi-core</artifactId>
-          <groupId>com.github.oshi</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>pebble</artifactId>
-          <groupId>io.pebbletemplates</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>cron-utils</artifactId>
-          <groupId>com.cronutils</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>docker-java</artifactId>
-          <groupId>com.github.docker-java</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>docker-java-transport-httpclient5</artifactId>
-          <groupId>com.github.docker-java</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsonschema-generator</artifactId>
-          <groupId>com.github.victools</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsonschema-module-javax-validation</artifactId>
-          <groupId>com.github.victools</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsonschema-module-jackson</artifactId>
-          <groupId>com.github.victools</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jsonschema-module-swagger-2</artifactId>
-          <groupId>com.github.victools</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.kestra</groupId>
+      <artifactId>script</artifactId>
+      <version>0.21.0</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.micronaut.test</groupId>
       <artifactId>micronaut-test-junit5</artifactId>
-      <version>3.0.5</version>
+      <version>4.6.2</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -356,20 +174,12 @@
           <artifactId>junit-jupiter-api</artifactId>
           <groupId>org.junit.jupiter</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>micronaut-runtime</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.7.2</version>
+      <version>5.10.1</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -389,13 +199,13 @@
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
-      <version>2.2</version>
+      <version>3.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-library</artifactId>
-      <version>2.2</version>
+      <version>3.0</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -406,347 +216,82 @@
     </dependency>
     <dependency>
       <groupId>io.kestra</groupId>
-      <artifactId>repository-memory</artifactId>
-      <version>0.4.0</version>
+      <artifactId>tests</artifactId>
+      <version>0.21.0</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
-          <artifactId>micronaut-http-client</artifactId>
-          <groupId>io.micronaut</groupId>
+          <artifactId>mockito-junit-jupiter</artifactId>
+          <groupId>org.mockito</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>micronaut-rxjava2-http-client</artifactId>
-          <groupId>io.micronaut.rxjava2</groupId>
+          <artifactId>assertj-core</artifactId>
+          <groupId>org.assertj</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
+          <artifactId>junit-jupiter-engine</artifactId>
+          <groupId>org.junit.jupiter</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>io.kestra</groupId>
+      <artifactId>repository-memory</artifactId>
+      <version>0.21.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jdbc</artifactId>
+          <groupId>io.kestra</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
+          <artifactId>micronaut-flyway</artifactId>
+          <groupId>io.micronaut.flyway</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>commons-lang3</artifactId>
-          <groupId>org.apache.commons</groupId>
+          <artifactId>micronaut-jdbc-hikari</artifactId>
+          <groupId>io.micronaut.sql</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>swagger-annotations</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>javax.annotation-api</artifactId>
-          <groupId>javax.annotation</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-data-model</artifactId>
-          <groupId>io.micronaut.data</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-management</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micrometer-core</artifactId>
-          <groupId>io.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-          <groupId>io.micronaut.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>logback-classic</artifactId>
-          <groupId>ch.qos.logback</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>log4j-to-slf4j</artifactId>
-          <groupId>org.apache.logging.log4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jul-to-slf4j</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-databind</artifactId>
-          <groupId>com.fasterxml.jackson.core</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-dataformat-yaml</artifactId>
-          <groupId>com.fasterxml.jackson.dataformat</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-module-parameter-names</artifactId>
-          <groupId>com.fasterxml.jackson.module</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-datatype-guava</artifactId>
-          <groupId>com.fasterxml.jackson.datatype</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>friendly-id</artifactId>
-          <groupId>com.devskiller.friendly-id</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>handlebars</artifactId>
-          <groupId>com.github.jknack</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-jq</artifactId>
-          <groupId>net.thisptr</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-runtime</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
+          <artifactId>jdbc-h2</artifactId>
+          <groupId>io.kestra</groupId>
         </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>io.kestra</groupId>
       <artifactId>runner-memory</artifactId>
-      <version>0.4.0</version>
+      <version>0.21.0</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>micronaut-http-client</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-rxjava2-http-client</artifactId>
-          <groupId>io.micronaut.rxjava2</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-lang3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-annotations</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>javax.annotation-api</artifactId>
-          <groupId>javax.annotation</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-data-model</artifactId>
-          <groupId>io.micronaut.data</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-management</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micrometer-core</artifactId>
-          <groupId>io.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-          <groupId>io.micronaut.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>logback-classic</artifactId>
-          <groupId>ch.qos.logback</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>log4j-to-slf4j</artifactId>
-          <groupId>org.apache.logging.log4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jul-to-slf4j</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-databind</artifactId>
-          <groupId>com.fasterxml.jackson.core</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-dataformat-yaml</artifactId>
-          <groupId>com.fasterxml.jackson.dataformat</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-module-parameter-names</artifactId>
-          <groupId>com.fasterxml.jackson.module</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-datatype-guava</artifactId>
-          <groupId>com.fasterxml.jackson.datatype</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>friendly-id</artifactId>
-          <groupId>com.devskiller.friendly-id</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>handlebars</artifactId>
-          <groupId>com.github.jknack</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-jq</artifactId>
-          <groupId>net.thisptr</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-runtime</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.kestra</groupId>
       <artifactId>storage-local</artifactId>
-      <version>0.4.0</version>
+      <version>0.21.0</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>micronaut-http-client</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-rxjava2-http-client</artifactId>
-          <groupId>io.micronaut.rxjava2</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-io</artifactId>
-          <groupId>commons-io</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-lang3</artifactId>
-          <groupId>org.apache.commons</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>swagger-annotations</artifactId>
-          <groupId>io.swagger.core.v3</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>javax.annotation-api</artifactId>
-          <groupId>javax.annotation</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-data-model</artifactId>
-          <groupId>io.micronaut.data</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-management</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micrometer-core</artifactId>
-          <groupId>io.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-          <groupId>io.micronaut.micrometer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>logback-classic</artifactId>
-          <groupId>ch.qos.logback</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>log4j-to-slf4j</artifactId>
-          <groupId>org.apache.logging.log4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jul-to-slf4j</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-databind</artifactId>
-          <groupId>com.fasterxml.jackson.core</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-dataformat-yaml</artifactId>
-          <groupId>com.fasterxml.jackson.dataformat</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-module-parameter-names</artifactId>
-          <groupId>com.fasterxml.jackson.module</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-datatype-guava</artifactId>
-          <groupId>com.fasterxml.jackson.datatype</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>friendly-id</artifactId>
-          <groupId>com.devskiller.friendly-id</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>handlebars</artifactId>
-          <groupId>com.github.jknack</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jackson-jq</artifactId>
-          <groupId>net.thisptr</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-runtime</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>micronaut-inject</artifactId>
-          <groupId>io.micronaut</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.micronaut</groupId>
-        <artifactId>micronaut-bom</artifactId>
-        <version>${micronaut.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>${junit.version}</version>
+        <groupId>io.kestra</groupId>
+        <artifactId>platform</artifactId>
+        <version>${kestra.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
   <properties>
-    <lombok.version>1.18.22</lombok.version>
-    <micronaut.version>3.3.3</micronaut.version>
-    <maven.compiler.target>${jdk.version}</maven.compiler.target>
-    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <kestra.version>0.4.0</kestra.version>
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.8.2</junit.version>
-    <jdk.version>11</jdk.version>
+    <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
+    <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.target>${jdk.version}</maven.compiler.target>
+    <kestra.version>0.21.0</kestra.version>
+    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdk.version>21</jdk.version>
   </properties>
 </project>
-
