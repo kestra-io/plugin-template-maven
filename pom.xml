@@ -7,21 +7,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.kestra.plugin</groupId>
     <artifactId>plugin-template-maven</artifactId>
-    <version>0.16.0-SNAPSHOT</version>
+    <version>0.21.0-SNAPSHOT</version>
 
     <properties>
-        <jdk.version>17</jdk.version>
+        <jdk.version>21</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
         <maven.compiler.source>${jdk.version}</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <lombok.version>1.18.32</lombok.version>
-        <kestra.version>[0.16,)</kestra.version>
-        <micronaut.version>4.3.7</micronaut.version>
-        <micronaut.validation.version>4.4.4</micronaut.validation.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+        <kestra.version>0.21.0</kestra.version>
+
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
     </properties>
 
     <repositories>
@@ -34,9 +34,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.micronaut.platform</groupId>
-                <artifactId>micronaut-platform</artifactId>
-                <version>${micronaut.version}</version>
+                <groupId>io.kestra</groupId>
+                <artifactId>platform</artifactId>
+                <version>${kestra.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -47,34 +47,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject-java</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.validation</groupId>
-            <artifactId>micronaut-validation</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- uncomment if the plugin uses reactive types -->
-<!--        <dependency>-->
-<!--            <groupId>io.micronaut.reactor</groupId>-->
-<!--            <artifactId>micronaut-reactor</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-jackson-databind</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.kestra</groupId>
             <artifactId>core</artifactId>
-            <version>${kestra.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.kestra</groupId>
+            <artifactId>script</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -93,18 +75,22 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
-            <version>2.2</version>
             <scope>test</scope>
         </dependency>
 
 
         <!-- kestra tests dependencies for runner -->
+        <dependency>
+            <groupId>io.kestra</groupId>
+            <artifactId>tests</artifactId>
+            <version>${kestra.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.kestra</groupId>
             <artifactId>repository-memory</artifactId>
@@ -138,7 +124,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${maven-shade-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -187,7 +173,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.0</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <compilerArgs>
                             <arg>-parameters</arg>
@@ -196,17 +182,18 @@
                             <path>
                                 <groupId>org.projectlombok</groupId>
                                 <artifactId>lombok</artifactId>
-                                <version>${lombok.version}</version>
                             </path>
                             <path>
                                 <groupId>io.micronaut</groupId>
                                 <artifactId>micronaut-inject-java</artifactId>
-                                <version>${micronaut.version}</version>
                             </path>
                             <path>
                                 <groupId>io.micronaut.validation</groupId>
                                 <artifactId>micronaut-validation-processor</artifactId>
-                                <version>${micronaut.validation.version}</version>
+                            </path>
+                            <path>
+                                <groupId>io.kestra</groupId>
+                                <artifactId>processor</artifactId>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
@@ -224,17 +211,18 @@
                                     <path>
                                         <groupId>org.projectlombok</groupId>
                                         <artifactId>lombok</artifactId>
-                                        <version>${lombok.version}</version>
                                     </path>
                                     <path>
                                         <groupId>io.micronaut</groupId>
                                         <artifactId>micronaut-inject-java</artifactId>
-                                        <version>${micronaut.version}</version>
                                     </path>
                                     <path>
                                         <groupId>io.micronaut.validation</groupId>
                                         <artifactId>micronaut-validation-processor</artifactId>
-                                        <version>${micronaut.validation.version}</version>
+                                    </path>
+                                    <path>
+                                        <groupId>io.kestra</groupId>
+                                        <artifactId>processor</artifactId>
                                     </path>
                                 </annotationProcessorPaths>
                             </configuration>
