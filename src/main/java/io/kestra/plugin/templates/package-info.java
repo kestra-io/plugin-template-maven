@@ -1,6 +1,7 @@
 @PluginSubGroup(
-    description = "This subgroup of plugins contains example tasks for creating Kestra tasks and triggers.",
-    categories = { PluginSubGroup.PluginCategory.TOOL}
+    title = "Example plugin",
+    description = "A plugin to show how to build a plugin in Kestra.",
+    categories = PluginSubGroup.PluginCategory.TOOL
 )
 package io.kestra.plugin.templates;
 

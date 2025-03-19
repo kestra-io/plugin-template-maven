@@ -116,6 +116,21 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <X-Kestra-Name>${project.name}</X-Kestra-Name>
+              <X-Kestra-Title>Template</X-Kestra-Title>
+              <X-Kestra-Group>${project.groupId}.templates</X-Kestra-Group>
+              <X-Kestra-Description>${project.description}</X-Kestra-Description>
+              <X-Kestra-Version>${project.version}</X-Kestra-Version>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>${maven-shade-plugin.version}</version>
         <executions>
@@ -283,6 +298,8 @@
     </dependencies>
   </dependencyManagement>
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
     <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
@@ -291,7 +308,6 @@
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <kestra.version>0.21.0</kestra.version>
     <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>21</jdk.version>
   </properties>
 </project>
