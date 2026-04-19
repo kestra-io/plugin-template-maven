@@ -32,15 +32,17 @@
 </p>
 <p align="center" style="color:grey;"><i>Get started with Kestra in 4 minutes.</i></p>
 
-
 # Kestra Plugin Template for Maven
 
-A template for creating a kestra plugin with Maven.
+## Why
 
-This repository serves as a general template for creating a new [Kestra](https://github.com/kestra-io/kestra) plugin. It should take only a few minutes! Use this repository as a scaffold to ensure that you've set up the plugin correctly, including unit tests and CI/CD workflows.
+- What user problem does this solve? Teams need a concrete starting point for building and validating new Kestra plugins without recreating the same project scaffolding from scratch.
+- Why would a team adopt this plugin in a workflow? It gives plugin authors a ready-made reference repo they can adapt alongside their own build, test, and publishing workflow.
+- What operational/business outcome does it enable? It shortens plugin delivery time, reduces setup mistakes, and makes internal or partner plugin development more repeatable.
 
-![Kestra orchestrator](https://kestra.io/video.gif)
+## What
 
+Kestra plugin providing integration with Template Maven. Exposes 1 plugin components (tasks, triggers, and/or conditions).
 
 ## Documentation
 * Full documentation can be found under [kestra.io/docs](https://kestra.io/docs)
